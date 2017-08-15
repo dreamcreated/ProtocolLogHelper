@@ -4,7 +4,9 @@
 >   auto logPrinter = ProtocolLogHelper::Reqs(req1, req2, req3).Rsps(rsp1, rsp2, rsp3).Ret(retCode, __FUNCTION__);
 
    其中 req1-3表示你的request结构体实例,可以是任意类型任意个数, rsp1-3表示你的返回结果结构体实例,可以是任意类型任意个数,retCode是单个任意类型的接口返回值.__FUNCTION__是当前函数名,如果接口名称和函数名称不一样,这里可以自行传入正确的接口名称字符串.
+   
    logPrinter会持有rsp1-3实例以及retCode实例的引用,在logPrinter的生命周期内,需要保证传入的rsp和retcode实例有效,在定义logPrinter之后,可以随意修改rsp1-3和retCode,因为logPrinter持有的是引用,所以后面的修改都将影响最终logPrinter析构时的最终返回结果的打印.
+   
    如果你的接口中使用异步方式调用了其他接口,并且在异步接口返回之前无法返回当前接口,那么则需要使用下面的代码初始化日志打印器:
 
 >   auto logPrinter = ProtocolLogHelper::Reqs(req1, req2, req3).Rsps(rsp1, rsp2, rsp3).RetPtr(retCode, __FUNCTION__);
