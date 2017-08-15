@@ -11,4 +11,5 @@
 
 >   auto logPrinter = ProtocolLogHelper::Reqs(req1, req2, req3).Rsps(rsp1, rsp2, rsp3).RetPtr(retCode, \_\_FUNCTION\_\_);
 
-   和上面的例子唯一的不同是, 最后的Ret函数变成了RetPtr函数,返回值是一个智能指针,那么在整个异步调用过程中,都需要持有logPrinter,保证其不被析构,通常做法是把logPrinter作为callback类中的一个成员变量,通过decttype可以提取logPrinter的类型, 如果callback是一个lambda表达式,那么只需要把logPrinter填入caputer list中即可, 例如: [logPrinter](...){...}
+   和上面的例子唯一的不同是, 最后的Ret函数变成了RetPtr函数,返回值是一个智能指针,那么在整个异步调用过程中,都需要持有logPrinter,保证其不被析构,通常做法是把logPrinter作为callback类中的一个成员变量,通过decttype可以提取logPrinter的类型, 如果callback是一个lambda表达式,那么只需要把logPrinter填入caputer list中即可, 例如:
+> \[logPrinter\](...){...}
